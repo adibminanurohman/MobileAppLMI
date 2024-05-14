@@ -4,4 +4,7 @@
     <string name="title_explore">Explore</string>
     <string name="title_majalah">Majalah</string>
     <string name="search">Search</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mulai_donasi_sekarng">Mulai donasi sekarng</string>
 </resources>

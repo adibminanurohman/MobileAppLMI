@@ -65,4 +65,10 @@ dependencies {
 
     //android browser aka custom tabs chrome
     implementation("androidx.browser:browser:1.8.0")
+
+    //page indicator
+    implementation("com.tbuonomo:dotsindicator:5.0")
+
+    //viewpager2
+    implementation ("androidx.viewpager2:viewpager2:1.0.0")
 }
