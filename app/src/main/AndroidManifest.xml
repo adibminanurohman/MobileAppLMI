@@ -16,7 +16,7 @@
         android:theme="@style/Theme.MobileAppLMI"
         tools:targetApi="31">
         <activity
-            android:name=".DetailMajalahActivity"
+            android:name=".ui.majalah.DetailMajalahActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -9,8 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.laznaslmi.mobileapplmi.R
 
-class MajalahAdapter(private var majalahList: List<MajalahDataClass>):
+class MajalahAdapter(private var majalahList: List<MajalahDataClass>, private val itemClickListener: OnItemClickListener):
     RecyclerView.Adapter<MajalahAdapter.MajalahViewHolder>(){
+
+    interface OnItemClickListener {
+        fun onItemClick(majalah: MajalahDataClass)
+    }
+
     class MajalahViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         var image: ImageView = itemView.findViewById(R.id.img_cover_majalah)
         var title: TextView = itemView.findViewById(R.id.judul_majalah)
@@ -35,6 +40,10 @@ class MajalahAdapter(private var majalahList: List<MajalahDataClass>):
         holder.title.text = currentItem.title
         holder.release.text = currentItem.release
         holder.desc.text = currentItem.description
+
+        holder.itemView.setOnClickListener {
+            itemClickListener.onItemClick(currentItem)
+        }
     }
 
     fun updateData(newMajalahList: List<MajalahDataClass>){

@@ -1,13 +1,12 @@
 package com.laznaslmi.mobileapplmi.ui.majalah
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.laznaslmi.mobileapplmi.databinding.FragmentMajalahBinding
@@ -35,7 +34,14 @@ private var _binding: FragmentMajalahBinding? = null
       recyclerView.layoutManager = LinearLayoutManager(context)
 
       //adapter
-      val adapter = MajalahAdapter(emptyList())
+      val adapter = MajalahAdapter(emptyList(), object: MajalahAdapter.OnItemClickListener{
+          override fun onItemClick(majalah: MajalahDataClass) {
+              val intent = Intent(requireContext(), DetailMajalahActivity::class.java)
+              intent.putExtra("majalah", majalah)
+              startActivity(intent)
+          }
+
+      })
       recyclerView.adapter = adapter
 
       //observe
