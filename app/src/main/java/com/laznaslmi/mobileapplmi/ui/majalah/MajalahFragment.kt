@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.laznaslmi.mobileapplmi.databinding.FragmentMajalahBinding
 
 class MajalahFragment : Fragment() {
@@ -21,16 +24,31 @@ private var _binding: FragmentMajalahBinding? = null
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    val notificationsViewModel =
-            ViewModelProvider(this).get(MajalahViewModel::class.java)
+      val notificationsViewModel =
+              ViewModelProvider(this).get(MajalahViewModel::class.java)
 
-    _binding = FragmentMajalahBinding.inflate(inflater, container, false)
-    val root: View = binding.root
+      _binding = FragmentMajalahBinding.inflate(inflater, container, false)
+      val root: View = binding.root
 
-    val textView: TextView = binding.textMajalah
-    notificationsViewModel.text.observe(viewLifecycleOwner) {
-      textView.text = it
-    }
+      //recycler view
+      val recyclerView = binding.recyclerViewMajalah
+      recyclerView.layoutManager = LinearLayoutManager(context)
+
+      //adapter
+      val adapter = MajalahAdapter(emptyList())
+      recyclerView.adapter = adapter
+
+      //observe
+      notificationsViewModel.majalahList.observe(viewLifecycleOwner){majalahList->
+        majalahList?.let { adapter.updateData(it) }
+      }
+
+      notificationsViewModel.errorMessage.observe(viewLifecycleOwner){errorMessage->
+        errorMessage?.let {
+          Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+        }
+      }
+
     return root
   }
 

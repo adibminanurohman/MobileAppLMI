@@ -66,4 +66,7 @@ dependencies {
 
     //android browser aka custom tabs chrome
     implementation("androidx.browser:browser:1.8.0")
+
+    //recycler view
+    implementation ("androidx.recyclerview:recyclerview:1.3.2")
 }
