@@ -16,6 +16,8 @@ class MajalahViewModel : ViewModel() {
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
 
+    private var originalList: List<MajalahDataClass> = listOf()
+
     init {
         fetchData()
     }
@@ -24,12 +26,25 @@ class MajalahViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val response = RetrofitInstance.apiService.getMajalahList()
+                originalList = response
                 _majalahList.postValue(response)
             }
             catch (e: Exception){
                 Log.e("NotificationsViewModel", "Error fetching data", e)
                 _errorMessage.postValue("Failed to load data ${e.message}")
             }
+        }
+    }
+
+    fun searchMajalah(query: String?){
+        if (query != null && query.isNotBlank()){
+            val filteredList = originalList.filter {
+                it.title.contains(query, true)
+            }
+            _majalahList.value = filteredList
+        }
+        else {
+            _majalahList.value = originalList
         }
     }
 }

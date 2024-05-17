@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -24,7 +25,7 @@ private var _binding: FragmentMajalahBinding? = null
     savedInstanceState: Bundle?
   ): View {
       val notificationsViewModel =
-              ViewModelProvider(this).get(MajalahViewModel::class.java)
+          ViewModelProvider(this)[MajalahViewModel::class.java]
 
       _binding = FragmentMajalahBinding.inflate(inflater, container, false)
       val root: View = binding.root
@@ -46,7 +47,9 @@ private var _binding: FragmentMajalahBinding? = null
 
       //observe
       notificationsViewModel.majalahList.observe(viewLifecycleOwner){majalahList->
-        majalahList?.let { adapter.updateData(it) }
+        majalahList?.let {
+            adapter.updateData(it)
+        }
       }
 
       notificationsViewModel.errorMessage.observe(viewLifecycleOwner){errorMessage->
@@ -55,10 +58,31 @@ private var _binding: FragmentMajalahBinding? = null
         }
       }
 
+      //search
+      val searchView: SearchView = binding.searchMajalah
+      searchView.queryHint = "Cari Majalah"
+
+      searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+          override fun onQueryTextSubmit(query: String?): Boolean {
+              if (query != null){
+                  notificationsViewModel.searchMajalah(query)
+              }
+              return true
+          }
+
+          override fun onQueryTextChange(newText: String?): Boolean {
+              if (newText != null){
+                  notificationsViewModel.searchMajalah(newText)
+              }
+              return true
+          }
+
+      })
+
     return root
   }
 
-override fun onDestroyView() {
+    override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }

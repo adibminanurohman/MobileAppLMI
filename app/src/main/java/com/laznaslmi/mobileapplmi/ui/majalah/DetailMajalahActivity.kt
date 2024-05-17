@@ -1,9 +1,16 @@
 package com.laznaslmi.mobileapplmi.ui.majalah
 
+import android.app.DownloadManager
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -17,6 +24,7 @@ import com.laznaslmi.mobileapplmi.ui.majalah.MajalahDataClass
 class DetailMajalahActivity : AppCompatActivity() {
     private var _binding: ActivityDetailMajalahBinding? = null
     private val binding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -42,6 +50,39 @@ class DetailMajalahActivity : AppCompatActivity() {
             tanggal.text = detailMajalah.release
             views.text = detailMajalah.views.toString()
             deskripsi.text = detailMajalah.description
+
+            binding.bacaOnline.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(detailMajalah.link))
+                startActivity(intent)
+            }
+            binding.unduh.setOnClickListener {
+                val request = DownloadManager.Request(Uri.parse(detailMajalah.link))
+                    .setTitle("Download Majalah")
+                    .setDescription("Download file from ${detailMajalah.link}")
+                    .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                    .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "${detailMajalah.title}.pdf")
+                    .setAllowedOverMetered(true)
+                    .setAllowedOverRoaming(true)
+
+                val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+                downloadManager.enqueue(request)
+                Toast.makeText(this, "Download Started", Toast.LENGTH_SHORT).show()
+            }
+            binding.kirim.setOnClickListener {
+                val shareIntent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, "Majalah ini sangat menginspirasi ${detailMajalah.link}")
+                    type = "text/plain"
+                }
+                val chooser = Intent.createChooser(shareIntent, "Share via")
+                if (shareIntent.resolveActivity(packageManager) != null){
+                    startActivity(chooser)
+                }
+                else {
+                    Toast.makeText(this, "No app available to share content", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
+
     }
 }
