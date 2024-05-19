@@ -37,6 +37,10 @@ class DetailMajalahActivity : AppCompatActivity() {
             insets
         }
 
+        binding.back.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
         val detailMajalah = intent.getParcelableExtra<MajalahDataClass>("majalah")
         if (detailMajalah != null){
             val coverMajalah: ImageView = binding.detailCoverMajalah

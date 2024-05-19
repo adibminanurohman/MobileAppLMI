@@ -26,8 +26,8 @@ class MajalahViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val response = RetrofitInstance.apiService.getMajalahList()
-                originalList = response
-                _majalahList.postValue(response)
+                originalList = response.sortedByDescending { it.id }
+                _majalahList.postValue(originalList)
             }
             catch (e: Exception){
                 Log.e("NotificationsViewModel", "Error fetching data", e)

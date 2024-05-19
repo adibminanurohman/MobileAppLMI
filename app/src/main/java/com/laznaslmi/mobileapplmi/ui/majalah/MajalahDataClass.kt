@@ -10,5 +10,6 @@ data class MajalahDataClass(
     val release: String,
     val description: String,
     val views: Int?,
-    val link: String?
+    val link: String?,
+    val id: Int?
 ): Parcelable
