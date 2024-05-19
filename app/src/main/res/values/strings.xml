@@ -7,4 +7,5 @@
     <string name="daftar_majalah">Daftar Majalah</string>
     <string name="deskripsi_majalah">Temukan hikmah dan kekuatan di balik setiap kesulitan dalam majalah ini. Temukan bagaimana musibah dapat membuka jalan menuju kebahagiaan dan pembelajaran berharga.</string>
     <string name="search_placeholder_text">Cari majalah</string>
+    <string name="hello_blank_fragment">tes</string>
 </resources>
