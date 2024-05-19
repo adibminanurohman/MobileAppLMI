@@ -16,8 +16,9 @@
     <item name="editTextColor">@color/white</item>
 </style>
 
-<style name="Theme.MobileAppLMI.NoActionBar" parent="Theme.MobileAppLMI">
-    <item name="windowActionBar">false</item>
-    <item name="windowNoTitle">true</item>
-</style>
+        <!-- Define the custom tab text appearance -->
+        <style name="CustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+            <item name="textAllCaps">false</item>
+            <item name="android:textSize">11sp</item>
+        </style>
 </resources>

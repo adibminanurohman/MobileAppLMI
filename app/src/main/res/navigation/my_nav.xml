@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.laznaslmi.mobileapplmi.onboarding.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+        <action
+            android:id="@+id/action_splashFragment_to_onBoarding1Fragment"
+            app:destination="@id/onBoarding1Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/onBoarding1Fragment"
+        android:name="com.laznaslmi.mobileapplmi.onboarding.OnBoarding1Fragment"
+        android:label="fragment_on_boarding1"
+        tools:layout="@layout/fragment_on_boarding1" >
+        <action
+            android:id="@+id/action_onBoarding1Fragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.laznaslmi.mobileapplmi.MainActivity"
+        android:label="MainActivity" />
+</navigation>
