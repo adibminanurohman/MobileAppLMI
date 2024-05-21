@@ -6,13 +6,19 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".ui.beranda.BerandaFragment">
 
-<com.google.android.material.tabs.TabLayout
+    <Space
+        android:id="@+id/space1"
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+    <com.google.android.material.tabs.TabLayout
     android:id="@+id/tab_layout"
     android:layout_width="match_parent"
     android:layout_height="30dp"
-    android:layout_alignParentTop="true"
-    app:tabSelectedTextColor="@color/blue_700"
-    app:tabTextColor="@color/gray_400"
+        android:layout_marginLeft="16dp"
+    android:layout_below="@id/space1"
+    app:tabSelectedTextColor="@color/blue_950"
+    app:tabTextColor="@color/gray_700"
     app:tabTextAppearance="@style/CustomTabTextAppearance"
     app:tabIndicatorColor="@android:color/transparent"
     app:tabIndicatorHeight="0dp"

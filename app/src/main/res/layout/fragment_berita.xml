@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.beranda.tab.BeritaFragment"
     android:orientation="vertical">
@@ -20,11 +21,14 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_banners" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="26dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -47,16 +51,20 @@
                 android:textSize="16dp" />
         </RelativeLayout>
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_berita"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="70dp"
             tools:listitem="@layout/item_berita" />
+
     </LinearLayout>
 
 </ScrollView>

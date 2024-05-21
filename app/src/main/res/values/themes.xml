@@ -20,5 +20,6 @@
         <style name="CustomTabTextAppearance" parent="TextAppearance.Design.Tab">
             <item name="textAllCaps">false</item>
             <item name="android:textSize">11sp</item>
+            <item name="fontFamily">@font/poppins_medium</item>
         </style>
 </resources>
