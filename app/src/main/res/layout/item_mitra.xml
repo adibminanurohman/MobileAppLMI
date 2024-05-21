@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="95dp"
+    android:layout_marginTop="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toStartOf="@id/cv_imgMitra">
+
+        <TextView
+            android:id="@+id/tv_dateMitra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="02 Jan 2023 | 10:03"
+            android:textColor="@color/gray_400"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins"/>
+
+        <TextView
+            android:id="@+id/tv_titleMitra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="8dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins_medium"
+            android:maxLines="2"
+            android:text="LMI SMP Islam Qurani Al Bahjah Blitar: Edukasi Siaga Bencana Alam"
+            android:textColor="@color/gray_950"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_imgMitra"
+        android:layout_width="94dp"
+        android:layout_height="71dp"
+        android:layout_alignParentEnd="true"
+        app:cardCornerRadius="6dp">
+
+        <ImageView
+            android:id="@+id/img_imgMitra"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/dumybanners"/>
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cv_imgMitra"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Berita"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/gray_400"/>
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_share"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+</RelativeLayout>
