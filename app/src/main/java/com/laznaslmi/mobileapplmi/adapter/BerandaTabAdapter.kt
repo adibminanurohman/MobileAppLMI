@@ -38,4 +38,6 @@ class BerandaTabAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapt
     fun getPageTitle(position: Int): CharSequence {
         return fragmentTitleList[position]
     }
+
+
 }

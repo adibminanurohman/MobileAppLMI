@@ -7,5 +7,8 @@
     <string name="daftar_majalah">Daftar Majalah</string>
     <string name="deskripsi_majalah">Temukan hikmah dan kekuatan di balik setiap kesulitan dalam majalah ini. Temukan bagaimana musibah dapat membuka jalan menuju kebahagiaan dan pembelajaran berharga.</string>
     <string name="search_placeholder_text">Cari majalah</string>
-    <string name="hello_blank_fragment">tes</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mulai_donasi_sekarng">Mulai donasi sekarng</string>
+    <string name="lmi_dan_smp_islam_qurani_al_bahjah_blitar_edukasi_siaga_bencana_alam">LMI dan SMP Islam Qurani Al Bahjah Blitar: Edukasi Siaga Bencana Alam</string>
+    <string name="_02_jan_2023_10_03">02 Jan 2023 | 10:03</string>
 </resources>

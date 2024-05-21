@@ -53,6 +53,9 @@ class BerandaFragment : Fragment() {
             tab?.view?.setBackgroundResource(R.drawable.tab_background_selector)
         }
 
+        // Disable swipe gestures
+        viewPager.isUserInputEnabled = false
+
         return view
     }
 }
