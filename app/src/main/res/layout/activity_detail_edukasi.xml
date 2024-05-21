@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/detailEdukasi"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context=".ui.beranda.DetailEdukasiActivity">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_marginHorizontal="20dp"
+    >
+
+    <ImageView
+        android:id="@+id/ic_back"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/arrowback"
+        android:layout_alignParentStart="true"/>
+
+    <ImageView
+        android:id="@+id/ic_share"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_share"
+        android:layout_toLeftOf="@id/ic_saved"
+        android:layout_marginEnd="8dp"/>
+
+    <ImageView
+        android:id="@+id/ic_saved"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_saved"
+        android:layout_alignParentEnd="true"/>
+
+</RelativeLayout>
+<Space
+    android:layout_width="match_parent"
+    android:layout_height="16dp" />
+
+<TextView
+    android:id="@+id/tv_dateDetailEdukasi"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="20dp"
+    android:text="Senin, 22 April 2024 10:00 WIB"
+    android:textSize="12sp"/>
+
+<Space
+    android:layout_width="match_parent"
+    android:layout_height="8dp" />
+
+<TextView
+    android:id="@+id/tv_titleDetailEdukasi"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="20dp"
+    android:fontFamily="@font/poppins_semibold"
+    android:text="LMI SMP Islam Qurani Al Bahjah Blitar: Edukasi Siaga Bencana Alam"
+    android:textSize="16sp" />
+
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="203dp"
+    android:layout_marginHorizontal="20dp"
+    android:layout_gravity="center_horizontal"
+    app:cardCornerRadius="6dp">
+
+    <ImageView
+        android:id="@+id/imgDetailEdukasi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+</androidx.cardview.widget.CardView>
+
+<Space
+    android:layout_width="match_parent"
+    android:layout_height="16dp" />
+
+<TextView
+    android:id="@+id/tv_deskripsiDetailEdukasi"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="20dp"
+    android:text="Bacem, Ponggok, Blitar - Sobat LMI. Edukasi siaga bencana alam harus dimulai sejak dini. Kita semua belajar agar meminimalisir hal yang terjadi. Bukan hanya orang dewasa, edukasi ini harus diajarkan ke anak-anak juga, karena potensi bencana bisa di lokasi mana saja.
+Kemarin (27/12), Lembaga Manajemen Infaq (LMI) melakukan edukasi Siaga Bencana Alam (GANALA) di SMP Islam Qurani Al Bahjah Blitar. Memberikan wawasan kepada guru dan murid upaya untuk menyelamatkan diri saat terjadi gempa. Serta edukasi pertolongan pertama dasar.
+Alhamdulillah" />
+
+</LinearLayout>
