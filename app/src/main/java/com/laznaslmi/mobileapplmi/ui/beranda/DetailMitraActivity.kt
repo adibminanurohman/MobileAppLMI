@@ -31,6 +31,10 @@ class DetailMitraActivity : AppCompatActivity() {
             insets
         }
 
+        binding.icBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
         val detailMitra = intent.getParcelableExtra<MitraDataClass>("mitra")
         if (detailMitra != null) {
             val imageDetailMitra: ImageView = binding.imgDetailMitra

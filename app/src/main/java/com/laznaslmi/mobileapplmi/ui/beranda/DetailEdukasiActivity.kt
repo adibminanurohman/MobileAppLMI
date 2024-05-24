@@ -28,6 +28,10 @@ class DetailEdukasiActivity : AppCompatActivity() {
             insets
         }
 
+        binding.icBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
         val detailEdukasi = intent.getParcelableExtra<EdukasiDataClass>("edukasi")
         if (detailEdukasi != null) {
             val imageDetailEdukasi: ImageView = binding.imgDetailEdukasi

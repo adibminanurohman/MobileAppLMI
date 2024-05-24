@@ -29,6 +29,10 @@ class DetailBeritaActivity : AppCompatActivity() {
             insets
         }
 
+        binding.icBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
         val detailBerita = intent.getParcelableExtra<BeritaDataClass>("berita")
         if (detailBerita != null) {
             val imageDetailBerita: ImageView = binding.imgDetailBerita

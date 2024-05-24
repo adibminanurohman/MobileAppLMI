@@ -27,6 +27,9 @@ class DetailBannersActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        binding.icBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         val detailBanners = intent.getParcelableExtra<PostDataClass>("banners")
         if (detailBanners != null) {

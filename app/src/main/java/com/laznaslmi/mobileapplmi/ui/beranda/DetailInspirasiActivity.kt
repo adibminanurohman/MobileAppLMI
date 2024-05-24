@@ -28,6 +28,10 @@ class DetailInspirasiActivity : AppCompatActivity() {
             insets
         }
 
+        binding.icBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
         val detailInspirasi = intent.getParcelableExtra<InspirasiDataClass>("inspirasi")
         if (detailInspirasi != null) {
             val imageDetailInspirasi: ImageView = binding.imgDetailInspirasi

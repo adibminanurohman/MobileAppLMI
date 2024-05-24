@@ -29,6 +29,10 @@ class DetailProgramActivity : AppCompatActivity() {
             insets
         }
 
+        binding.icBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
         val detailProgram = intent.getParcelableExtra<ProgramDataClass>("program")
         if (detailProgram != null) {
             val imageDetailProgram: ImageView = binding.imgDetailProgram
