@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.laznaslmi.mobileapplmi.R
 import com.laznaslmi.mobileapplmi.databinding.FragmentExploreBinding
 
 class ExploreFragment : Fragment() {
@@ -22,15 +25,17 @@ private var _binding: FragmentExploreBinding? = null
     savedInstanceState: Bundle?
   ): View {
     val dashboardViewModel =
-            ViewModelProvider(this).get(ExploreViewModel::class.java)
+            ViewModelProvider(this).get(SearchExploreViewModel::class.java)
 
     _binding = FragmentExploreBinding.inflate(inflater, container, false)
     val root: View = binding.root
 
-    val textView: TextView = binding.textExplore
-    dashboardViewModel.text.observe(viewLifecycleOwner) {
-      textView.text = it
-    }
+      //Explore to searchExplore
+      val cvSearch: CardView = binding.cvSearchExplore
+      cvSearch.setOnClickListener {
+          findNavController().navigate(R.id.action_navigation_explore_to_searchExploreFragment)
+      }
+
     return root
   }
 

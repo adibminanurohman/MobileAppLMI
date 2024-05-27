@@ -15,11 +15,20 @@
         android:id="@+id/navigation_explore"
         android:name="com.laznaslmi.mobileapplmi.ui.explore.ExploreFragment"
         android:label="@string/title_explore"
-        tools:layout="@layout/fragment_explore" />
+        tools:layout="@layout/fragment_explore" >
+        <action
+            android:id="@+id/action_navigation_explore_to_searchExploreFragment"
+            app:destination="@id/searchExploreFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_majalah"
         android:name="com.laznaslmi.mobileapplmi.ui.majalah.MajalahFragment"
         android:label="@string/title_majalah"
         tools:layout="@layout/fragment_majalah" />
+    <fragment
+        android:id="@+id/searchExploreFragment"
+        android:name="com.laznaslmi.mobileapplmi.ui.explore.SearchExploreFragment"
+        android:label="fragment_search_explore"
+        tools:layout="@layout/fragment_search_explore" />
 </navigation>
