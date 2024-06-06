@@ -24,8 +24,12 @@ class ProgramViewModel : ViewModel() {
     private fun fetchData() {
         viewModelScope.launch {
             try {
-                val response = RetrofitInstanceProgram.apiService.getProgramList()
-                _programList.postValue(response.posts)
+                val response = RetrofitInstanceProgram.apiService.getProgramList(categoryId = 2)
+                if (response.success) {
+                    _programList.postValue(response.posts.filter { it.categoryId == 2 })
+                } else {
+                    _errorMessage.postValue("Failed to load data: ${response.message}")
+                }
             } catch (e: Exception) {
                 Log.e("ProgramViewModel", "Error fetching data", e)
                 _errorMessage.postValue("Failed to load data: ${e.message}")

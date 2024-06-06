@@ -46,7 +46,7 @@
                 android:layout_toRightOf="@id/imageView3"
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="TRANDING"
+                android:text="TRENDING"
                 android:textColor="@color/gray_950"
                 android:textSize="16dp" />
         </RelativeLayout>

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.EdukasiDataClass
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.RetrofitInstanceEdukasi
+import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.RetrofitInstanceProgram
 import kotlinx.coroutines.launch
 
 class EdukasiViewModel : ViewModel() {
@@ -24,8 +25,12 @@ class EdukasiViewModel : ViewModel() {
     private fun fetchData() {
         viewModelScope.launch {
             try {
-                val response = RetrofitInstanceEdukasi.apiService.getEdukasiList()
-                _edukasiList.postValue(response.posts)
+                val response = RetrofitInstanceEdukasi.apiService.getEdukasiList(categoryId = 4)
+                if (response.success) {
+                    _edukasiList.postValue(response.posts.filter { it.categoryId == 4 })
+                } else {
+                    _errorMessage.postValue("Failed to load data: ${response.message}")
+                }
             } catch (e: Exception) {
                 Log.e("EdukasiViewModel", "Error fetching data", e)
                 _errorMessage.postValue("Failed to load data: ${e.message}")

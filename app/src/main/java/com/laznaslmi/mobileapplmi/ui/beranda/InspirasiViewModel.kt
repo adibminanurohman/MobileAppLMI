@@ -26,8 +26,12 @@ class InspirasiViewModel : ViewModel() {
     private fun fetchData() {
         viewModelScope.launch {
             try {
-                val response = RetrofitInstanceInspirasi.apiService.getInspirasiList()
-                _inspirasiList.postValue(response.posts)
+                val response = RetrofitInstanceInspirasi.apiService.getInspirasiList(categoryId = 3)
+                if (response.success) {
+                    _inspirasiList.postValue(response.posts.filter { it.categoryId == 3 })
+                } else {
+                    _errorMessage.postValue("Failed to load data: ${response.message}")
+                }
             } catch (e: Exception) {
                 Log.e("InspirasiViewModel", "Error fetching data", e)
                 _errorMessage.postValue("Failed to load data: ${e.message}")
