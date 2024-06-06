@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.laznaslmi.mobileapplmi.R
 import com.laznaslmi.mobileapplmi.databinding.FragmentExploreBinding
@@ -34,6 +35,30 @@ private var _binding: FragmentExploreBinding? = null
       val cvSearch: CardView = binding.cvSearchExplore
       cvSearch.setOnClickListener {
           findNavController().navigate(R.id.action_navigation_explore_to_searchExploreFragment)
+      }
+
+      //Explore to infaq
+      val cvInfaq: CardView = binding.cvInfaq
+      cvInfaq.setOnClickListener {
+          findNavController().navigate(R.id.action_navigation_explore_to_infaqFragment)
+      }
+
+      //Explore to wakaf
+      val cvWakaf: CardView = binding.cvWakaf
+      cvWakaf.setOnClickListener {
+          findNavController().navigate(R.id.action_navigation_explore_to_wakafFragment)
+      }
+
+      //Explore to zakat
+      val cvZakat: CardView = binding.cvZakat
+      cvZakat.setOnClickListener {
+          findNavController().navigate(R.id.action_navigation_explore_to_zakatFragment)
+      }
+
+      //Explore to qurban
+      val cvQurban: CardView = binding.cvQurban
+      cvQurban.setOnClickListener {
+          findNavController().navigate(R.id.action_navigation_explore_to_qurbanFragment)
       }
 
     return root

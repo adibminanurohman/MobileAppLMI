@@ -19,6 +19,18 @@
         <action
             android:id="@+id/action_navigation_explore_to_searchExploreFragment"
             app:destination="@id/searchExploreFragment" />
+        <action
+            android:id="@+id/action_navigation_explore_to_infaqFragment"
+            app:destination="@id/infaqFragment" />
+        <action
+            android:id="@+id/action_navigation_explore_to_wakafFragment"
+            app:destination="@id/wakafFragment" />
+        <action
+            android:id="@+id/action_navigation_explore_to_zakatFragment"
+            app:destination="@id/zakatFragment" />
+        <action
+            android:id="@+id/action_navigation_explore_to_qurbanFragment"
+            app:destination="@id/qurbanFragment" />
     </fragment>
 
     <fragment
@@ -31,4 +43,24 @@
         android:name="com.laznaslmi.mobileapplmi.ui.explore.SearchExploreFragment"
         android:label="fragment_search_explore"
         tools:layout="@layout/fragment_search_explore" />
+    <fragment
+        android:id="@+id/infaqFragment"
+        android:name="com.laznaslmi.mobileapplmi.ui.explore.webview.InfaqFragment"
+        android:label="fragment_infaq"
+        tools:layout="@layout/fragment_infaq" />
+    <fragment
+        android:id="@+id/wakafFragment"
+        android:name="com.laznaslmi.mobileapplmi.ui.explore.webview.WakafFragment"
+        android:label="fragment_wakaf"
+        tools:layout="@layout/fragment_wakaf" />
+    <fragment
+        android:id="@+id/zakatFragment"
+        android:name="com.laznaslmi.mobileapplmi.ui.explore.webview.ZakatFragment"
+        android:label="fragment_zakat"
+        tools:layout="@layout/fragment_zakat" />
+    <fragment
+        android:id="@+id/qurbanFragment"
+        android:name="com.laznaslmi.mobileapplmi.ui.explore.webview.QurbanFragment"
+        android:label="fragment_qurban"
+        tools:layout="@layout/fragment_qurban" />
 </navigation>
