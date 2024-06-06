@@ -22,9 +22,10 @@ tools:context=".onboarding.ThirdScreen">
         android:layout_marginTop="250dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:text="Lorem Ipsum"
+        android:text="Komunitas yang peduli adalah kunci dari perubahan positif."
         android:textColor="@color/white"
-        android:textSize="24sp" />
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textView3"
@@ -34,9 +35,10 @@ tools:context=".onboarding.ThirdScreen">
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:text="is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's "
+        android:text="@string/temukan_komunitas_yang_bersemangat_dan_berdedikasi_untuk_mendukung_berbagai_tujuan_mulia_bergabunglah_dan_jadilah_bagian_dari_perubahan"
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:fontFamily="@font/poppins"
+        android:textSize="13sp" />
 
     <Button
         android:id="@+id/btn_mulaidonasi"

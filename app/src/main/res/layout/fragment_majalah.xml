@@ -15,7 +15,8 @@
         android:text="@string/daftar_majalah"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textColor="@color/gray_900"
+        android:fontFamily="@font/poppins_semibold" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"

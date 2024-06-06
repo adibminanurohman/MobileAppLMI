@@ -7,18 +7,10 @@ android:layout_height="match_parent"
 android:orientation="vertical"
 tools:context=".ui.explore.SearchExploreFragment">
 
-<TextView
-    android:id="@+id/text_search_explore"
+    <com.google.android.material.card.MaterialCardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:textAlignment="center"
-    android:textSize="20sp"
-    android:textStyle="bold" />
-
-<com.google.android.material.card.MaterialCardView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
     android:layout_marginHorizontal="16dp"
     app:cardCornerRadius="20dp"
     >

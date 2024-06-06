@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.laznaslmi.mobileapplmi.R
 
 class SearchExploreAdapter(private var searchExploreList: List<SearchExploreDataClass>, private val itemClickListener: OnItemClickListener):
@@ -35,6 +36,10 @@ class SearchExploreAdapter(private var searchExploreList: List<SearchExploreData
         val currentItem = searchExploreList[position]
         Glide.with(holder.itemView.context)
             .load(currentItem.image)
+            .apply(
+                RequestOptions()
+                    .placeholder(R.drawable.placeholder_image)
+                    .error(R.drawable.error_image))
             .into(holder.imgSearchExplore)
         holder.titleSearchExplore.text = currentItem.title
         holder.dateSearchExplore.text = currentItem.date

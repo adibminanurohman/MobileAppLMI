@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.laznaslmi.mobileapplmi.R
 
 class ProgramAdapter(private var programList: List<ProgramDataClass>, private val itemClickListener: OnItemClickListener):
@@ -35,6 +36,10 @@ class ProgramAdapter(private var programList: List<ProgramDataClass>, private va
         val currentItem = programList[position]
         Glide.with(holder.itemView.context)
             .load(currentItem.image)
+            .apply(
+                RequestOptions()
+                    .placeholder(R.drawable.placeholder_image)
+                    .error(R.drawable.error_image))
             .into(holder.imgProgram)
         holder.titleProgram.text = currentItem.title
         holder.dateProgram.text = currentItem.date

@@ -47,6 +47,8 @@ tools:context=".ui.beranda.DetailProgramActivity">
     android:id="@+id/tv_dateDetailProgram"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:textColor="@color/gray_400"
+    android:fontFamily="@font/poppins"
     android:layout_marginHorizontal="20dp"
     android:text="Senin, 22 April 2024 10:00 WIB"
     android:textSize="12sp"/>
@@ -60,9 +62,14 @@ tools:context=".ui.beranda.DetailProgramActivity">
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="20dp"
+    android:textColor="@color/gray_900"
     android:fontFamily="@font/poppins_semibold"
     android:text="LMI SMP Islam Qurani Al Bahjah Blitar: Edukasi Siaga Bencana Alam"
     android:textSize="16sp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
 
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
@@ -86,6 +93,9 @@ tools:context=".ui.beranda.DetailProgramActivity">
     android:id="@+id/tv_deskripsiDetailProgram"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:textSize="12sp"
+    android:textColor="@color/gray_400"
+    android:fontFamily="@font/poppins"
     android:layout_marginHorizontal="20dp"
     android:text="Bacem, Ponggok, Blitar - Sobat LMI. Edukasi siaga bencana alam harus dimulai sejak dini. Kita semua belajar agar meminimalisir hal yang terjadi. Bukan hanya orang dewasa, edukasi ini harus diajarkan ke anak-anak juga, karena potensi bencana bisa di lokasi mana saja.
 Kemarin (27/12), Lembaga Manajemen Infaq (LMI) melakukan edukasi Siaga Bencana Alam (GANALA) di SMP Islam Qurani Al Bahjah Blitar. Memberikan wawasan kepada guru dan murid upaya untuk menyelamatkan diri saat terjadi gempa. Serta edukasi pertolongan pertama dasar.

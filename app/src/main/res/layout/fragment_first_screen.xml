@@ -22,9 +22,10 @@ tools:context=".onboarding.FirstScreen">
         android:layout_marginTop="250dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:text="Lorem Ipsum"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/bersama_kita_bisa_menciptakan_perubahan_besar"
         android:textColor="@color/white"
-        android:textSize="24sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textView3"
@@ -34,8 +35,9 @@ tools:context=".onboarding.FirstScreen">
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:text="is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's "
+        android:fontFamily="@font/poppins"
+        android:text="Gabungkan kekuatan dan donasi Anda untuk mendukung berbagai inisiatif yang mengubah hidup. Mari kita bergerak maju bersama."
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="13sp" />
 </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
