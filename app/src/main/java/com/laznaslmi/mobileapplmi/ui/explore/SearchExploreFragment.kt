@@ -1,15 +1,18 @@
 package com.laznaslmi.mobileapplmi.ui.explore
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.laznaslmi.mobileapplmi.R
 import com.laznaslmi.mobileapplmi.databinding.FragmentSearchExploreBinding
 import com.laznaslmi.mobileapplmi.ui.explore.retrofit.SearchExploreAdapter
 import com.laznaslmi.mobileapplmi.ui.explore.retrofit.SearchExploreDataClass
@@ -56,10 +59,8 @@ class SearchExploreFragment : Fragment() {
         }
 
         // search
-        val searchView: SearchView = binding.searchSearchExplore
-        searchView.queryHint = "Cari Explore"
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        val searchView: androidx.appcompat.widget.SearchView = binding.searchSearchExplore
+        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchExploreViewModel.searchExplore(query)
                 return true
@@ -70,6 +71,14 @@ class SearchExploreFragment : Fragment() {
                 return true
             }
         })
+
+        // Mengubah background EditText di dalam SearchView untuk menghilangkan garis bawah
+        val searchEditText = searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
+        searchEditText.setHintTextColor(Color.parseColor("#808080"))
+
+        // Menghilangkan background default dan mengatur background custom
+        searchEditText.background = null
+        searchEditText.setBackgroundResource(R.drawable.custom_edittext_background)
 
         return root
     }

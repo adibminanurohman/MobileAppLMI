@@ -13,7 +13,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_searchExplore"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:backgroundTint="@color/gray_100"
         app:cardCornerRadius="10dp">
 
@@ -29,13 +29,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="16sp"
                 android:textColor="@color/gray_400"
-                android:text="Cari bacaan di MyLMi" />
+                android:text="Cari bacaan di MyLMI" />
 
             <ImageView
                 android:id="@+id/imageView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_weight="1"
                 android:src="@drawable/ic_search"
                 android:layout_alignParentEnd="true"/>
