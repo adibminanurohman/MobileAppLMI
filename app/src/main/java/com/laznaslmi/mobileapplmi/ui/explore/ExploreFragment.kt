@@ -1,5 +1,7 @@
 package com.laznaslmi.mobileapplmi.ui.explore
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -59,6 +61,15 @@ private var _binding: FragmentExploreBinding? = null
       val cvQurban: CardView = binding.cvQurban
       cvQurban.setOnClickListener {
           findNavController().navigate(R.id.action_navigation_explore_to_qurbanFragment)
+      }
+
+      val cvKonsultasi: CardView = binding.cvKonsultasi
+      cvKonsultasi.setOnClickListener {
+          val phoneNumber = "6282230000909" // Ganti dengan nomor WhatsApp yang ingin dihubungi
+          val url = "https://wa.me/$phoneNumber"
+          val intent = Intent(Intent.ACTION_VIEW)
+          intent.data = Uri.parse(url)
+          context?.startActivity(intent)
       }
 
     return root
