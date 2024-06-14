@@ -6,10 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.MitraDataClass
-import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.ProgramDataClass
-import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.RetrofitInstanceEdukasi
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.RetrofitInstanceMitra
-import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.RetrofitInstanceProgram
 import kotlinx.coroutines.launch
 
 class MitraViewModel : ViewModel() {
@@ -24,10 +21,13 @@ class MitraViewModel : ViewModel() {
         fetchData()
     }
 
+    fun refreshData() {
+        fetchData()
+    }
+
     private fun fetchData() {
         viewModelScope.launch {
             try {
-
                 val response = RetrofitInstanceMitra.apiService.getMitraList(categoryId = 5)
                 if (response.success) {
                     _mitraList.postValue(response.posts.filter { it.categoryId == 5 })

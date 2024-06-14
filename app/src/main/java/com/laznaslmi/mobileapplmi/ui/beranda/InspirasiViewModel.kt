@@ -6,9 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.InspirasiDataClass
-import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.ProgramDataClass
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.RetrofitInstanceInspirasi
-import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.RetrofitInstanceProgram
 import kotlinx.coroutines.launch
 
 class InspirasiViewModel : ViewModel() {
@@ -23,12 +21,16 @@ class InspirasiViewModel : ViewModel() {
         fetchData()
     }
 
+    fun refreshData() {
+        fetchData()
+    }
+
     private fun fetchData() {
         viewModelScope.launch {
             try {
-                val response = RetrofitInstanceInspirasi.apiService.getInspirasiList(categoryId = 3)
+                val response = RetrofitInstanceInspirasi.apiService.getInspirasiList(categoryId = 2)
                 if (response.success) {
-                    _inspirasiList.postValue(response.posts.filter { it.categoryId == 3 })
+                    _inspirasiList.postValue(response.posts.filter { it.categoryId == 2 })
                 } else {
                     _errorMessage.postValue("Failed to load data: ${response.message}")
                 }

@@ -33,30 +33,36 @@ class ProgramFragment : Fragment() {
         _binding = FragmentProgramBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        //recycler view
+        // Recycler view
         val recyclerView = binding.rvProgram
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        //adapter
-        val adapter = ProgramAdapter(emptyList(), object: ProgramAdapter.OnItemClickListener{
+        // Adapter
+        val adapter = ProgramAdapter(emptyList(), object : ProgramAdapter.OnItemClickListener {
             override fun onItemClick(program: ProgramDataClass) {
                 val intent = Intent(requireContext(), DetailProgramActivity::class.java)
                 intent.putExtra("program", program)
                 startActivity(intent)
             }
-
         })
         recyclerView.adapter = adapter
 
-        //observe
-        programViewModel.programList.observe(viewLifecycleOwner){programList->
+        // Observe
+        programViewModel.programList.observe(viewLifecycleOwner) { programList ->
             programList?.let { adapter.updateData(it) }
+            binding.swipeRefreshLayout.isRefreshing = false
         }
 
-        programViewModel.errorMessage.observe(viewLifecycleOwner){errorMessage->
+        programViewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
             errorMessage?.let {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+                binding.swipeRefreshLayout.isRefreshing = false
             }
+        }
+
+        // Setup SwipeRefreshLayout
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            programViewModel.refreshData()
         }
 
         return root
