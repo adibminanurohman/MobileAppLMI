@@ -10,15 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.laznaslmi.mobileapplmi.databinding.FragmentInspirasiBinding
-import com.laznaslmi.mobileapplmi.databinding.FragmentProgramBinding
 import com.laznaslmi.mobileapplmi.ui.beranda.DetailInspirasiActivity
-import com.laznaslmi.mobileapplmi.ui.beranda.DetailProgramActivity
 import com.laznaslmi.mobileapplmi.ui.beranda.InspirasiViewModel
-import com.laznaslmi.mobileapplmi.ui.beranda.ProgramViewModel
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.InspirasiAdapter
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.InspirasiDataClass
-import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.ProgramAdapter
-import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.ProgramDataClass
 
 class InspirasiFragment : Fragment() {
 
@@ -38,30 +33,36 @@ class InspirasiFragment : Fragment() {
         _binding = FragmentInspirasiBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        //recycler view
+        // Recycler view
         val recyclerView = binding.rvInspirasi
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        //adapter
-        val adapter = InspirasiAdapter(emptyList(), object: InspirasiAdapter.OnItemClickListener{
+        // Adapter
+        val adapter = InspirasiAdapter(emptyList(), object : InspirasiAdapter.OnItemClickListener {
             override fun onItemClick(inspirasi: InspirasiDataClass) {
                 val intent = Intent(requireContext(), DetailInspirasiActivity::class.java)
                 intent.putExtra("inspirasi", inspirasi)
                 startActivity(intent)
             }
-
         })
         recyclerView.adapter = adapter
 
-        //observe
-        inspirasiViewModel.inspirasiList.observe(viewLifecycleOwner){inspirasiList->
+        // Observe
+        inspirasiViewModel.inspirasiList.observe(viewLifecycleOwner) { inspirasiList ->
             inspirasiList?.let { adapter.updateData(it) }
+            binding.swipeRefreshLayout.isRefreshing = false
         }
 
-        inspirasiViewModel.errorMessage.observe(viewLifecycleOwner){errorMessage->
+        inspirasiViewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
             errorMessage?.let {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+                binding.swipeRefreshLayout.isRefreshing = false
             }
+        }
+
+        // Setup SwipeRefreshLayout
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            inspirasiViewModel.refreshData()
         }
 
         return root

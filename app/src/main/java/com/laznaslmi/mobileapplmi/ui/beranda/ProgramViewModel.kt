@@ -21,6 +21,10 @@ class ProgramViewModel : ViewModel() {
         fetchData()
     }
 
+    fun refreshData() {
+        fetchData()
+    }
+
     private fun fetchData() {
         viewModelScope.launch {
             try {
