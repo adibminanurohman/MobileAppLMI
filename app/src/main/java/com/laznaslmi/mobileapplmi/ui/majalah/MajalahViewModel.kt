@@ -22,28 +22,26 @@ class MajalahViewModel : ViewModel() {
         fetchData()
     }
 
-    private fun fetchData() {
+    fun fetchData() {
         viewModelScope.launch {
             try {
                 val response = RetrofitInstance.apiService.getMajalahList()
                 originalList = response.sortedByDescending { it.id }
                 _majalahList.postValue(originalList)
-            }
-            catch (e: Exception){
+            } catch (e: Exception) {
                 Log.e("NotificationsViewModel", "Error fetching data", e)
                 _errorMessage.postValue("Failed to load data ${e.message}")
             }
         }
     }
 
-    fun searchMajalah(query: String?){
-        if (query != null && query.isNotBlank()){
+    fun searchMajalah(query: String?) {
+        if (query != null && query.isNotBlank()) {
             val filteredList = originalList.filter {
                 it.title.contains(query, true)
             }
             _majalahList.value = filteredList
-        }
-        else {
+        } else {
             _majalahList.value = originalList
         }
     }
