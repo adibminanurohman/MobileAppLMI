@@ -11,5 +11,5 @@ tools:context=".onboarding.SplashFragment">
     android:layout_width="126dp"
     android:layout_height="140dp"
     android:layout_centerInParent="true"
-    android:src="@drawable/logosplash" />
+    android:src="@drawable/ic_logonew" />
 </RelativeLayout>

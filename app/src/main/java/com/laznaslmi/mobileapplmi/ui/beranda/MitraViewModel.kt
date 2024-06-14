@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.MitraDataClass
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.ProgramDataClass
+import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.RetrofitInstanceEdukasi
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.RetrofitInstanceMitra
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.RetrofitInstanceProgram
 import kotlinx.coroutines.launch
@@ -26,8 +27,13 @@ class MitraViewModel : ViewModel() {
     private fun fetchData() {
         viewModelScope.launch {
             try {
-                val response = RetrofitInstanceMitra.apiService.getMitraList()
-                _mitraList.postValue(response.posts)
+
+                val response = RetrofitInstanceMitra.apiService.getMitraList(categoryId = 5)
+                if (response.success) {
+                    _mitraList.postValue(response.posts.filter { it.categoryId == 5 })
+                } else {
+                    _errorMessage.postValue("Failed to load data: ${response.message}")
+                }
             } catch (e: Exception) {
                 Log.e("MitraViewModel", "Error fetching data", e)
                 _errorMessage.postValue("Failed to load data: ${e.message}")
