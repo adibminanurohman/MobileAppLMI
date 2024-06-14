@@ -21,7 +21,7 @@ class BannersViewModel : ViewModel() {
         fetchData()
     }
 
-    private fun fetchData() {
+    internal fun fetchData() {
         viewModelScope.launch {
             try {
                 val response = RetrofitInstanceBanners.apiService.getBannersList()

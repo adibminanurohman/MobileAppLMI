@@ -23,7 +23,7 @@ class BeritaViewModel : ViewModel() {
         fetchData()
     }
 
-    private fun fetchData() {
+    internal fun fetchData() {
         viewModelScope.launch {
             try {
                 val response = RetrofitInstanceBerita.apiService.getBeritaList()
