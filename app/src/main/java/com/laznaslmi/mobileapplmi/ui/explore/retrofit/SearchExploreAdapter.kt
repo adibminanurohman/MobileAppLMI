@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.laznaslmi.mobileapplmi.R
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class SearchExploreAdapter(private var searchExploreList: List<SearchExploreDataClass>, private val itemClickListener: OnItemClickListener):
     RecyclerView.Adapter<SearchExploreAdapter.SearchExploreViewHolder>() {
@@ -42,7 +44,7 @@ class SearchExploreAdapter(private var searchExploreList: List<SearchExploreData
                     .error(R.drawable.error_image))
             .into(holder.imgSearchExplore)
         holder.titleSearchExplore.text = currentItem.title
-        holder.dateSearchExplore.text = currentItem.date
+        holder.dateSearchExplore.text = currentItem.date?.toFormattedDateString()
         holder.itemView.setOnClickListener {
             itemClickListener.onItemClick(currentItem)
         }
@@ -51,5 +53,12 @@ class SearchExploreAdapter(private var searchExploreList: List<SearchExploreData
     fun updateData(newSearchExploreList: List<SearchExploreDataClass>) {
         searchExploreList = newSearchExploreList
         notifyDataSetChanged()
+    }
+
+    private fun String.toFormattedDateString(): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+        val date = inputFormat.parse(this)
+        return outputFormat.format(date ?: "")
     }
 }

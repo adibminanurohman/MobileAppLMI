@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.laznaslmi.mobileapplmi.ui.explore.retrofit.RetrofitInstanceSearchExplore
 import com.laznaslmi.mobileapplmi.ui.explore.retrofit.SearchExploreDataClass
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class SearchExploreViewModel : ViewModel() {
 
@@ -27,7 +29,7 @@ class SearchExploreViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val response = RetrofitInstanceSearchExplore.apiService.getSearchExploreList()
-                originalList = response.posts
+                originalList = response.posts.sortedByDescending { it.date?.toDate()?.time }
                 _searchExploreList.postValue(originalList)
             } catch (e: Exception) {
                 Log.e("SearchExploreViewModel", "Error fetching data", e)
@@ -45,5 +47,10 @@ class SearchExploreViewModel : ViewModel() {
         } else {
             _searchExploreList.value = originalList
         }
+    }
+
+    private fun String.toDate(): java.util.Date? {
+        val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        return format.parse(this)
     }
 }
