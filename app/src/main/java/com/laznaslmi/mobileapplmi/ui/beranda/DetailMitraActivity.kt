@@ -14,6 +14,8 @@ import com.laznaslmi.mobileapplmi.databinding.ActivityDetailProgramBinding
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.BeritaDataClass
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.MitraDataClass
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.ProgramDataClass
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class DetailMitraActivity : AppCompatActivity() {
     private var _binding: ActivityDetailMitraBinding? = null
@@ -44,7 +46,7 @@ class DetailMitraActivity : AppCompatActivity() {
 
             Glide.with(this).load(detailMitra.image).into(imageDetailMitra)
             titleDetailMitra.text = detailMitra.title
-            dateDetailMitra.text = detailMitra.date
+            dateDetailMitra.text = detailMitra.date?.toFormattedDateString()
             deskripsiDetailMitra.text = detailMitra.body
         }
     }
@@ -52,5 +54,12 @@ class DetailMitraActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun String.toFormattedDateString(): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+        val date = inputFormat.parse(this)
+        return outputFormat.format(date ?: "")
     }
 }

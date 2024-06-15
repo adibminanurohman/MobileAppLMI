@@ -12,6 +12,8 @@ import com.laznaslmi.mobileapplmi.R
 import com.laznaslmi.mobileapplmi.databinding.ActivityDetailProgramBinding
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.BeritaDataClass
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.ProgramDataClass
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class DetailProgramActivity : AppCompatActivity() {
     private var _binding: ActivityDetailProgramBinding? = null
@@ -42,7 +44,7 @@ class DetailProgramActivity : AppCompatActivity() {
 
             Glide.with(this).load(detailProgram.image).into(imageDetailProgram)
             titleDetailProgram.text = detailProgram.title
-            dateDetailProgram.text = detailProgram.date
+            dateDetailProgram.text = detailProgram.date?.toFormattedDateString()
             deskripsiDetailProgram.text = detailProgram.body
         }
     }
@@ -50,5 +52,12 @@ class DetailProgramActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun String.toFormattedDateString(): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+        val date = inputFormat.parse(this)
+        return outputFormat.format(date ?: "")
     }
 }

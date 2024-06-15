@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.laznaslmi.mobileapplmi.R
 import com.laznaslmi.mobileapplmi.databinding.ActivityDetailSearchExploreBinding
 import com.laznaslmi.mobileapplmi.ui.explore.retrofit.SearchExploreDataClass
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class DetailSearchExploreActivity : AppCompatActivity() {
     private var _binding: ActivityDetailSearchExploreBinding? = null
@@ -41,7 +43,7 @@ class DetailSearchExploreActivity : AppCompatActivity() {
 
             Glide.with(this).load(detailSearchExplore.image).into(imageDetailSearchExplore)
             titleDetailSearchExplore.text = detailSearchExplore.title
-            dateDetailSearchExplore.text = detailSearchExplore.date
+            dateDetailSearchExplore.text = detailSearchExplore.date?.toFormattedDateString()
             deskripsiDetailSearchExplore.text = detailSearchExplore.body
         }
     }
@@ -49,5 +51,12 @@ class DetailSearchExploreActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun String.toFormattedDateString(): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+        val date = inputFormat.parse(this)
+        return outputFormat.format(date ?: "")
     }
 }

@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.laznaslmi.mobileapplmi.R
 import com.laznaslmi.mobileapplmi.databinding.ActivityDetailEdukasiBinding
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.EdukasiDataClass
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class DetailEdukasiActivity : AppCompatActivity() {
     private var _binding: ActivityDetailEdukasiBinding? = null
@@ -41,7 +43,7 @@ class DetailEdukasiActivity : AppCompatActivity() {
 
             Glide.with(this).load(detailEdukasi.image).into(imageDetailEdukasi)
             titleDetailEdukasi.text = detailEdukasi.title
-            dateDetailEdukasi.text = detailEdukasi.date
+            dateDetailEdukasi.text = detailEdukasi.date?.toFormattedDateString()
             deskripsiDetailEdukasi.text = detailEdukasi.body
         }
     }
@@ -49,5 +51,12 @@ class DetailEdukasiActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun String.toFormattedDateString(): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+        val date = inputFormat.parse(this)
+        return outputFormat.format(date ?: "")
     }
 }

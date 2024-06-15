@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.InspirasiDataClass
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.RetrofitInstanceInspirasi
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class InspirasiViewModel : ViewModel() {
 
@@ -30,7 +32,10 @@ class InspirasiViewModel : ViewModel() {
             try {
                 val response = RetrofitInstanceInspirasi.apiService.getInspirasiList(categoryId = 2)
                 if (response.success) {
-                    _inspirasiList.postValue(response.posts.filter { it.categoryId == 2 })
+                    _inspirasiList.postValue(response.posts
+                        .filter { it.categoryId == 2 }
+                        .sortedByDescending { it.date?.toDate()?.time }
+                    )
                 } else {
                     _errorMessage.postValue("Failed to load data: ${response.message}")
                 }
@@ -39,5 +44,10 @@ class InspirasiViewModel : ViewModel() {
                 _errorMessage.postValue("Failed to load data: ${e.message}")
             }
         }
+    }
+
+    private fun String.toDate(): java.util.Date? {
+        val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        return format.parse(this)
     }
 }

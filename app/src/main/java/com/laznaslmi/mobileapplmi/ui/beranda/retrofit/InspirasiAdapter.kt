@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.laznaslmi.mobileapplmi.R
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class InspirasiAdapter(private var inspirasiList: List<InspirasiDataClass>, private val itemClickListener: OnItemClickListener):
     RecyclerView.Adapter<InspirasiAdapter.InspirasiViewHolder>() {
@@ -42,7 +44,7 @@ class InspirasiAdapter(private var inspirasiList: List<InspirasiDataClass>, priv
                     .error(R.drawable.error_image))
             .into(holder.imgInspirasi)
         holder.titleInspirasi.text = currentItem.title
-        holder.dateInspirasi.text = currentItem.date
+        holder.dateInspirasi.text = currentItem.date?.toFormattedDateString()
         holder.itemView.setOnClickListener {
             itemClickListener.onItemClick(currentItem)
         }
@@ -51,5 +53,12 @@ class InspirasiAdapter(private var inspirasiList: List<InspirasiDataClass>, priv
     fun updateData(newInspirasiList: List<InspirasiDataClass>) {
         inspirasiList = newInspirasiList
         notifyDataSetChanged()
+    }
+
+    private fun String.toFormattedDateString(): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+        val date = inputFormat.parse(this)
+        return outputFormat.format(date ?: "")
     }
 }

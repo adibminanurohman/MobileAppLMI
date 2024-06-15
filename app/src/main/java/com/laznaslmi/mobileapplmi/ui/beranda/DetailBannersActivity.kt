@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.laznaslmi.mobileapplmi.R
 import com.laznaslmi.mobileapplmi.databinding.ActivityDetailBannersBinding
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.PostDataClass
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class DetailBannersActivity : AppCompatActivity() {
     private var _binding: ActivityDetailBannersBinding? = null
@@ -40,7 +42,7 @@ class DetailBannersActivity : AppCompatActivity() {
 
             Glide.with(this).load(detailBanners.image).into(imageDetailBanners)
             titleDetailBanners.text = detailBanners.title
-            dateDetailBanners.text = detailBanners.date
+            dateDetailBanners.text = detailBanners.date?.toFormattedDateString()
             deskripsiDetailBanners.text = detailBanners.body
         }
     }
@@ -48,5 +50,12 @@ class DetailBannersActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun String.toFormattedDateString(): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+        val date = inputFormat.parse(this)
+        return outputFormat.format(date ?: "")
     }
 }

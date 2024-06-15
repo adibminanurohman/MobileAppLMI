@@ -20,6 +20,8 @@ import com.laznaslmi.mobileapplmi.R
 import com.laznaslmi.mobileapplmi.databinding.ActivityDetailMajalahBinding
 import com.laznaslmi.mobileapplmi.databinding.FragmentMajalahBinding
 import com.laznaslmi.mobileapplmi.ui.majalah.MajalahDataClass
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class DetailMajalahActivity : AppCompatActivity() {
     private var _binding: ActivityDetailMajalahBinding? = null
@@ -51,7 +53,7 @@ class DetailMajalahActivity : AppCompatActivity() {
 
             Glide.with(this).load(detailMajalah.image).into(coverMajalah)
             judulMajalah.text = detailMajalah.title
-            tanggal.text = detailMajalah.release
+            tanggal.text = detailMajalah.release.toFormattedDateString()
             views.text = detailMajalah.views.toString()
             deskripsi.text = detailMajalah.description
 
@@ -88,5 +90,12 @@ class DetailMajalahActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun String.toFormattedDateString(): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+        val date = inputFormat.parse(this)
+        return outputFormat.format(date ?: "")
     }
 }

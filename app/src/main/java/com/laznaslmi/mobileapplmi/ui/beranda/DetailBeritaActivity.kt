@@ -12,6 +12,8 @@ import com.laznaslmi.mobileapplmi.R
 import com.laznaslmi.mobileapplmi.databinding.ActivityDetailBeritaBinding
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.BeritaDataClass
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.PostDataClass
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class DetailBeritaActivity : AppCompatActivity() {
     private var _binding: ActivityDetailBeritaBinding? = null
@@ -42,7 +44,7 @@ class DetailBeritaActivity : AppCompatActivity() {
 
             Glide.with(this).load(detailBerita.image).into(imageDetailBerita)
             titleDetailBerita.text = detailBerita.title
-            dateDetailBerita.text = detailBerita.date
+            dateDetailBerita.text = detailBerita.date?.toFormattedDateString()
             deskripsiDetailBerita.text = detailBerita.body
         }
     }
@@ -50,5 +52,12 @@ class DetailBeritaActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun String.toFormattedDateString(): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+        val date = inputFormat.parse(this)
+        return outputFormat.format(date ?: "")
     }
 }

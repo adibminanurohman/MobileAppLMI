@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.MitraDataClass
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.RetrofitInstanceMitra
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class MitraViewModel : ViewModel() {
 
@@ -30,7 +32,10 @@ class MitraViewModel : ViewModel() {
             try {
                 val response = RetrofitInstanceMitra.apiService.getMitraList(categoryId = 5)
                 if (response.success) {
-                    _mitraList.postValue(response.posts.filter { it.categoryId == 5 })
+                    _mitraList.postValue(response.posts
+                        .filter { it.categoryId == 5 }
+                        .sortedByDescending { it.date?.toDate()?.time }
+                    )
                 } else {
                     _errorMessage.postValue("Failed to load data: ${response.message}")
                 }
@@ -39,5 +44,10 @@ class MitraViewModel : ViewModel() {
                 _errorMessage.postValue("Failed to load data: ${e.message}")
             }
         }
+    }
+
+    private fun String.toDate(): java.util.Date? {
+        val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        return format.parse(this)
     }
 }

@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.laznaslmi.mobileapplmi.R
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ProgramAdapter(private var programList: List<ProgramDataClass>, private val itemClickListener: OnItemClickListener):
     RecyclerView.Adapter<ProgramAdapter.ProgramViewHolder>() {
@@ -42,7 +44,7 @@ class ProgramAdapter(private var programList: List<ProgramDataClass>, private va
                     .error(R.drawable.error_image))
             .into(holder.imgProgram)
         holder.titleProgram.text = currentItem.title
-        holder.dateProgram.text = currentItem.date
+        holder.dateProgram.text = currentItem.date?.toFormattedDateString()
         holder.itemView.setOnClickListener {
             itemClickListener.onItemClick(currentItem)
         }
@@ -51,5 +53,12 @@ class ProgramAdapter(private var programList: List<ProgramDataClass>, private va
     fun updateData(newProgramList: List<ProgramDataClass>) {
         programList = newProgramList
         notifyDataSetChanged()
+    }
+
+    private fun String.toFormattedDateString(): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+        val date = inputFormat.parse(this)
+        return outputFormat.format(date ?: "")
     }
 }

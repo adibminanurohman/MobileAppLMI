@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.ProgramDataClass
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.RetrofitInstanceProgram
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ProgramViewModel : ViewModel() {
 
@@ -30,7 +32,10 @@ class ProgramViewModel : ViewModel() {
             try {
                 val response = RetrofitInstanceProgram.apiService.getProgramList(categoryId = 2)
                 if (response.success) {
-                    _programList.postValue(response.posts.filter { it.categoryId == 2 })
+                    val sortedPosts = response.posts
+                        .filter { it.categoryId == 2 }
+                        .sortedByDescending { it.date?.toDate()?.time }
+                    _programList.postValue(sortedPosts)
                 } else {
                     _errorMessage.postValue("Failed to load data: ${response.message}")
                 }
@@ -39,5 +44,10 @@ class ProgramViewModel : ViewModel() {
                 _errorMessage.postValue("Failed to load data: ${e.message}")
             }
         }
+    }
+
+    private fun String.toDate(): java.util.Date? {
+        val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        return format.parse(this)
     }
 }

@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.laznaslmi.mobileapplmi.R
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class MajalahAdapter(private var majalahList: List<MajalahDataClass>, private val itemClickListener: OnItemClickListener):
     RecyclerView.Adapter<MajalahAdapter.MajalahViewHolder>(){
@@ -43,7 +45,7 @@ class MajalahAdapter(private var majalahList: List<MajalahDataClass>, private va
                     .error(R.drawable.error_image))
             .into(holder.image)
         holder.title.text = currentItem.title
-        holder.release.text = currentItem.release
+        holder.release.text = currentItem.release.toFormattedDateString()
         holder.desc.text = currentItem.description
 
         holder.itemView.setOnClickListener {
@@ -54,5 +56,12 @@ class MajalahAdapter(private var majalahList: List<MajalahDataClass>, private va
     fun updateData(newMajalahList: List<MajalahDataClass>){
         majalahList = newMajalahList
         notifyDataSetChanged()
+    }
+
+    private fun String.toFormattedDateString(): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+        val date = inputFormat.parse(this)
+        return outputFormat.format(date ?: "")
     }
 }
