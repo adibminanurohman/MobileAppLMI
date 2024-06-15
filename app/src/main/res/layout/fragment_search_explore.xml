@@ -10,7 +10,7 @@ tools:context=".ui.explore.SearchExploreFragment">
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_search_explore"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/seaarch_bg"
         android:layout_marginHorizontal="20dp"

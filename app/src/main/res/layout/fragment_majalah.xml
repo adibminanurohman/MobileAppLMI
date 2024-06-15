@@ -21,7 +21,7 @@
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_majalah"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:background="@drawable/seaarch_bg"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"

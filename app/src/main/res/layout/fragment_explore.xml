@@ -13,7 +13,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_searchExplore"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="48dp"
         android:backgroundTint="@color/gray_100"
         app:cardCornerRadius="10dp">
 
