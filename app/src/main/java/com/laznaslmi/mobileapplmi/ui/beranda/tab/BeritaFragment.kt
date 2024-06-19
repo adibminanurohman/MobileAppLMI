@@ -5,11 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.laznaslmi.mobileapplmi.R
 import com.laznaslmi.mobileapplmi.databinding.FragmentBeritaBinding
 import com.laznaslmi.mobileapplmi.ui.beranda.BeritaViewModel
 import com.laznaslmi.mobileapplmi.ui.beranda.DetailBeritaActivity
@@ -30,6 +35,7 @@ class BeritaFragment : Fragment() {
     private lateinit var beritaViewModel: BeritaViewModel
 
     private lateinit var bannerAdapter: BannerAdapter
+    private lateinit var dotIndicator: LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,10 +61,17 @@ class BeritaFragment : Fragment() {
         bannerAdapter = BannerAdapter(emptyList(), requireContext())
         recyclerViewBanners.adapter = bannerAdapter
 
+        // Attach SnapHelper to RecyclerView
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(recyclerViewBanners)
+
+        // Dot indicator setup
+        dotIndicator = binding.dotIndicator
+
         // RecyclerView configuration for berita
         val recyclerViewBerita = binding.rvBerita
         recyclerViewBerita.layoutManager = LinearLayoutManager(context)
-        val adapterBerita = BeritaAdapter(emptyList(), object: BeritaAdapter.OnItemClickListener {
+        val adapterBerita = BeritaAdapter(emptyList(), object : BeritaAdapter.OnItemClickListener {
             override fun onItemClick(berita: BeritaDataClass) {
                 val intent = Intent(requireContext(), DetailBeritaActivity::class.java)
                 intent.putExtra("berita", berita)
@@ -67,6 +80,17 @@ class BeritaFragment : Fragment() {
         })
         recyclerViewBerita.adapter = adapterBerita
 
+        // Add scroll listener to RecyclerView
+        recyclerViewBanners.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val activePosition = layoutManager.findFirstCompletelyVisibleItemPosition()
+                if (activePosition != RecyclerView.NO_POSITION) {
+                    updateActiveDot(activePosition)
+                }
+            }
+        })
 
         // Observe BeritaViewModel
         beritaViewModel.beritaList.observe(viewLifecycleOwner) { beritaList ->
@@ -101,7 +125,9 @@ class BeritaFragment : Fragment() {
                 if (response.isSuccessful) {
                     val banners = response.body()?.banners
                     if (!banners.isNullOrEmpty()) {
-                        bannerAdapter.updateData(banners)
+                        val limitedBanners = banners.take(5)
+                        bannerAdapter.updateData(limitedBanners)
+                        setupDots(limitedBanners.size)
                     }
                 } else {
                     Toast.makeText(requireContext(), "Failed to fetch banners", Toast.LENGTH_SHORT).show()
@@ -114,5 +140,35 @@ class BeritaFragment : Fragment() {
                 binding.swipeRefresh.isRefreshing = false
             }
         })
+    }
+
+    private fun setupDots(size: Int) {
+        dotIndicator.removeAllViews()
+        for (i in 0 until size) {
+            val dot = ImageView(context).apply {
+                setImageResource(R.drawable.dot_inactive) // Assuming you have this drawable
+                val params = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    marginStart = 8
+                    marginEnd = 8
+                }
+                layoutParams = params
+            }
+            dotIndicator.addView(dot)
+        }
+        updateActiveDot(0)
+    }
+
+    private fun updateActiveDot(activePosition: Int) {
+        for (i in 0 until dotIndicator.childCount) {
+            val dot = dotIndicator.getChildAt(i) as ImageView
+            if (i == activePosition) {
+                dot.setImageResource(R.drawable.dot_active) // Assuming you have this drawable
+            } else {
+                dot.setImageResource(R.drawable.dot_inactive) // Assuming you have this drawable
+            }
+        }
     }
 }

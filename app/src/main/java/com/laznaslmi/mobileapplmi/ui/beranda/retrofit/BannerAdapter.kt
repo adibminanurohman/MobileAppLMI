@@ -33,13 +33,13 @@ class BannerAdapter(
                     .placeholder(R.drawable.placeholder_image)
                     .error(R.drawable.error_image))
             .into(holder.bannerImage)
-
     }
 
-    override fun getItemCount(): Int = banners.size
+    override fun getItemCount(): Int = banners.size.coerceAtMost(5)
 
     fun updateData(newBanners: List<Banner>) {
         banners = newBanners
         notifyDataSetChanged()
     }
 }
+
