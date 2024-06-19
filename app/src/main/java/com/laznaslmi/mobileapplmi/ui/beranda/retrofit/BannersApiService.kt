@@ -1,8 +1,9 @@
 package com.laznaslmi.mobileapplmi.ui.beranda.retrofit
 
+import retrofit2.Call
 import retrofit2.http.GET
 
-interface BannersApiService {
-    @GET("apilmi/mylmi-app/public/api/posts/")
-    suspend fun getBannersList(): BannersApiResponse
+interface ApiService {
+    @GET("banners")
+    fun getBanners(): Call<BannerResponse>
 }

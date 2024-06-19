@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import com.laznaslmi.mobileapplmi.R
 import com.laznaslmi.mobileapplmi.databinding.ActivityDetailBeritaBinding
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.BeritaDataClass
-import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.PostDataClass
 import java.text.SimpleDateFormat
 import java.util.Locale
 

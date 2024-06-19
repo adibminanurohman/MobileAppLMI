@@ -11,22 +11,25 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.laznaslmi.mobileapplmi.databinding.FragmentBeritaBinding
-import com.laznaslmi.mobileapplmi.ui.beranda.BannersViewModel
 import com.laznaslmi.mobileapplmi.ui.beranda.BeritaViewModel
-import com.laznaslmi.mobileapplmi.ui.beranda.DetailBannersActivity
 import com.laznaslmi.mobileapplmi.ui.beranda.DetailBeritaActivity
-import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.BannersAdapter
+import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.BannerAdapter
+import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.BannerResponse
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.BeritaAdapter
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.BeritaDataClass
-import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.PostDataClass
+import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class BeritaFragment : Fragment() {
 
     private var _binding: FragmentBeritaBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var bannersViewModel: BannersViewModel
     private lateinit var beritaViewModel: BeritaViewModel
+
+    private lateinit var bannerAdapter: BannerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +40,6 @@ class BeritaFragment : Fragment() {
         val root: View = binding.root
 
         // Initialize ViewModels
-        bannersViewModel = ViewModelProvider(this).get(BannersViewModel::class.java)
         beritaViewModel = ViewModelProvider(this).get(BeritaViewModel::class.java)
 
         // Setup SwipeRefreshLayout
@@ -47,24 +49,15 @@ class BeritaFragment : Fragment() {
             fetchData()
         }
 
-        // RecyclerView configuration
+        // RecyclerView configuration for banners
         val recyclerViewBanners = binding.rvBanners
         recyclerViewBanners.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        bannerAdapter = BannerAdapter(emptyList(), requireContext())
+        recyclerViewBanners.adapter = bannerAdapter
 
-        // RecyclerView configuration
+        // RecyclerView configuration for berita
         val recyclerViewBerita = binding.rvBerita
         recyclerViewBerita.layoutManager = LinearLayoutManager(context)
-
-        // Adapter for Banners
-        val adapterBanners = BannersAdapter(emptyList(), object: BannersAdapter.OnItemClickListener {
-            override fun onItemClick(banners: PostDataClass) {
-                val intent = Intent(requireContext(), DetailBannersActivity::class.java)
-                intent.putExtra("banners", banners)
-                startActivity(intent)
-            }
-        })
-
-        // Adapter for Berita
         val adapterBerita = BeritaAdapter(emptyList(), object: BeritaAdapter.OnItemClickListener {
             override fun onItemClick(berita: BeritaDataClass) {
                 val intent = Intent(requireContext(), DetailBeritaActivity::class.java)
@@ -72,21 +65,8 @@ class BeritaFragment : Fragment() {
                 startActivity(intent)
             }
         })
-
-        recyclerViewBanners.adapter = adapterBanners
         recyclerViewBerita.adapter = adapterBerita
 
-        // Observe BannersViewModel
-        bannersViewModel.bannersList.observe(viewLifecycleOwner) { bannersList ->
-            bannersList?.let { adapterBanners.updateData(it) }
-            swipeRefreshLayout.isRefreshing = false // Stop refresh animation
-        }
-        bannersViewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
-            errorMessage?.let {
-                Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
-                swipeRefreshLayout.isRefreshing = false // Stop refresh animation
-            }
-        }
 
         // Observe BeritaViewModel
         beritaViewModel.beritaList.observe(viewLifecycleOwner) { beritaList ->
@@ -112,7 +92,27 @@ class BeritaFragment : Fragment() {
     }
 
     private fun fetchData() {
-        bannersViewModel.fetchData()
         beritaViewModel.fetchData()
+
+        // Fetch Banners
+        val call = RetrofitClient.instance.getBanners()
+        call.enqueue(object : Callback<BannerResponse> {
+            override fun onResponse(call: Call<BannerResponse>, response: Response<BannerResponse>) {
+                if (response.isSuccessful) {
+                    val banners = response.body()?.banners
+                    if (!banners.isNullOrEmpty()) {
+                        bannerAdapter.updateData(banners)
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Failed to fetch banners", Toast.LENGTH_SHORT).show()
+                }
+                binding.swipeRefresh.isRefreshing = false
+            }
+
+            override fun onFailure(call: Call<BannerResponse>, t: Throwable) {
+                Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
+                binding.swipeRefresh.isRefreshing = false
+            }
+        })
     }
 }

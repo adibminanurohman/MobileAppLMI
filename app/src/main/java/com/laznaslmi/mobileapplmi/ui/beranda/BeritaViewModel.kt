@@ -6,8 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.BeritaDataClass
-import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.PostDataClass
-import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.RetrofitInstanceBanners
 import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.RetrofitInstanceBerita
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
