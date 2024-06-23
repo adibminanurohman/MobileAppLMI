@@ -32,7 +32,10 @@ class SearchExploreViewModel : ViewModel() {
                 val response = RetrofitInstanceSearchExplore.apiService.getSearchExploreList()
                 originalList = response.posts
                     .map { post ->
-                        post.copy(body = post.body?.let { HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY).toString() })
+                        post.copy(
+                            body = post.body?.let { HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY).toString() },
+                            image = fixImageUrl(post.image)
+                        )
                     }
                     .sortedByDescending { it.date?.toDate()?.time }
                 _searchExploreList.postValue(originalList)
@@ -41,6 +44,10 @@ class SearchExploreViewModel : ViewModel() {
                 _errorMessage.postValue("Failed to load data: ${e.message}")
             }
         }
+    }
+
+    private fun fixImageUrl(imageUrl: String?): String {
+        return imageUrl?.let { "http://msib6.lmizakat.id/lmizakat/public/storage/$it" } ?: ""
     }
 
     fun searchExplore(query: String?) {
