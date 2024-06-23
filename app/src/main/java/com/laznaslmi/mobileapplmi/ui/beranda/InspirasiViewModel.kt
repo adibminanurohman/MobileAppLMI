@@ -36,7 +36,10 @@ class InspirasiViewModel : ViewModel() {
                     _inspirasiList.postValue(response.posts
                         .filter { it.categoryId == 2 }
                         .map { post ->
-                            post.copy(body = post.body?.let { HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY).toString() })
+                            post.copy(
+                                body = post.body?.let { HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY).toString() },
+                                image = fixImageUrl(post.image)
+                            )
                         }
                         .sortedByDescending { it.date?.toDate()?.time }
                     )
@@ -48,6 +51,10 @@ class InspirasiViewModel : ViewModel() {
                 _errorMessage.postValue("Failed to load data: ${e.message}")
             }
         }
+    }
+
+    private fun fixImageUrl(imageUrl: String?): String {
+        return imageUrl?.let { "http://msib6.lmizakat.id/lmizakat/public/storage/$it" } ?: ""
     }
 
     private fun String.toDate(): java.util.Date? {

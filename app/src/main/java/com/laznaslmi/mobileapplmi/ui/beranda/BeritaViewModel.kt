@@ -30,7 +30,10 @@ class BeritaViewModel : ViewModel() {
             try {
                 val response = RetrofitInstanceBerita.apiService.getBeritaList()
                 val postsWithPlainText = response.posts.map { post ->
-                    post.copy(body = post.body?.let { HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY).toString() })
+                    post.copy(
+                        body = post.body?.let { HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY).toString() },
+                        image = fixImageUrl(post.image)
+                    )
                 }
                 _beritaList.postValue(postsWithPlainText.sortedByDescending { it.date })
             } catch (e: Exception) {
@@ -38,6 +41,10 @@ class BeritaViewModel : ViewModel() {
                 _errorMessage.postValue("Failed to load data: ${e.message}")
             }
         }
+    }
+
+    private fun fixImageUrl(imageUrl: String?): String {
+        return imageUrl?.let { "http://msib6.lmizakat.id/lmizakat/public/storage/$it" } ?: ""
     }
 
     private fun String.toDate(): java.util.Date? {
