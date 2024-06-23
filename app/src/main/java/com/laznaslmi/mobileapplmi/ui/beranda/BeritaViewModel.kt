@@ -1,6 +1,8 @@
 package com.laznaslmi.mobileapplmi.ui.beranda
 
+import android.text.Html
 import android.util.Log
+import androidx.core.text.HtmlCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,7 +29,10 @@ class BeritaViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val response = RetrofitInstanceBerita.apiService.getBeritaList()
-                _beritaList.postValue(response.posts.sortedByDescending { it.date })
+                val postsWithPlainText = response.posts.map { post ->
+                    post.copy(body = post.body?.let { HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY).toString() })
+                }
+                _beritaList.postValue(postsWithPlainText.sortedByDescending { it.date })
             } catch (e: Exception) {
                 Log.e("BeritaViewModel", "Error fetching data", e)
                 _errorMessage.postValue("Failed to load data: ${e.message}")

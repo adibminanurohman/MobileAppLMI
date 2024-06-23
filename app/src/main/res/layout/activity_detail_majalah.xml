@@ -31,6 +31,14 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
 
     <ImageView
         android:id="@+id/detail_cover_majalah"
@@ -42,6 +50,7 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="8dp" />
+
 
     <TextView
         android:id="@+id/detail_judul_majalah"
@@ -217,5 +226,9 @@
         android:textColor="@color/gray_400"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+</LinearLayout>
+
+    </ScrollView>
+
 
 </LinearLayout>

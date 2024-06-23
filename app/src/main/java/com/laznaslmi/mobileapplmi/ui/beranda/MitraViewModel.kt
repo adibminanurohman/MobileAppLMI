@@ -1,6 +1,7 @@
 package com.laznaslmi.mobileapplmi.ui.beranda
 
 import android.util.Log
+import androidx.core.text.HtmlCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -34,6 +35,9 @@ class MitraViewModel : ViewModel() {
                 if (response.success) {
                     _mitraList.postValue(response.posts
                         .filter { it.categoryId == 5 }
+                        .map { post ->
+                            post.copy(body = post.body?.let { HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY).toString() })
+                        }
                         .sortedByDescending { it.date?.toDate()?.time }
                     )
                 } else {
