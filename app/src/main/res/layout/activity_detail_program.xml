@@ -80,7 +80,7 @@ tools:context=".ui.beranda.DetailProgramActivity">
 
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
-    android:layout_height="203dp"
+    android:layout_height="300dp"
     android:layout_marginHorizontal="20dp"
     android:layout_gravity="center_horizontal"
     app:cardCornerRadius="6dp">
@@ -100,8 +100,8 @@ tools:context=".ui.beranda.DetailProgramActivity">
     android:id="@+id/tv_deskripsiDetailProgram"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textSize="12sp"
-    android:textColor="@color/gray_400"
+    android:textSize="14sp"
+    android:textColor="@color/gray_700"
     android:fontFamily="@font/poppins"
     android:layout_marginHorizontal="20dp"
     android:text="Bacem, Ponggok, Blitar - Sobat LMI. Edukasi siaga bencana alam harus dimulai sejak dini. Kita semua belajar agar meminimalisir hal yang terjadi. Bukan hanya orang dewasa, edukasi ini harus diajarkan ke anak-anak juga, karena potensi bencana bisa di lokasi mana saja.
