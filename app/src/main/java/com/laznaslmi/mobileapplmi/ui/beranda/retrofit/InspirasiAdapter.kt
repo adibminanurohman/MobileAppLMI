@@ -1,5 +1,6 @@
 package com.laznaslmi.mobileapplmi.ui.beranda.retrofit
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,8 @@ class InspirasiAdapter(private var inspirasiList: List<InspirasiDataClass>, priv
         var imgInspirasi: ImageView = itemView.findViewById(R.id.img_imgInspirasi)
         var titleInspirasi: TextView = itemView.findViewById(R.id.tv_titleInspirasi)
         var dateInspirasi: TextView = itemView.findViewById(R.id.tv_dateInspirasi)
+        var btnShareInspirasi: ImageView = itemView.findViewById(R.id.btnShareInspirasi)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InspirasiViewHolder {
@@ -47,6 +50,12 @@ class InspirasiAdapter(private var inspirasiList: List<InspirasiDataClass>, priv
         holder.dateInspirasi.text = currentItem.date?.toFormattedDateString()
         holder.itemView.setOnClickListener {
             itemClickListener.onItemClick(currentItem)
+        }
+        holder.btnShareInspirasi.setOnClickListener {
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "text/plain"
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "https://drive.google.com/drive/folders/14kAtUjC64PnoyQLHqHOismjXD2ZKOYue?usp=drive_link")
+            holder.itemView.context.startActivity(Intent.createChooser(shareIntent, "Share link via"))
         }
     }
 

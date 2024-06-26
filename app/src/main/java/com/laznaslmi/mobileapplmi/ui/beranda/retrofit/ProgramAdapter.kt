@@ -1,5 +1,6 @@
 package com.laznaslmi.mobileapplmi.ui.beranda.retrofit
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,8 @@ class ProgramAdapter(private var programList: List<ProgramDataClass>, private va
         var imgProgram: ImageView = itemView.findViewById(R.id.img_imgProgram)
         var titleProgram: TextView = itemView.findViewById(R.id.tv_titleProgram)
         var dateProgram: TextView = itemView.findViewById(R.id.tv_dateProgram)
+        var btnShareProgram: ImageView = itemView.findViewById(R.id.btnShareProgram)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProgramViewHolder {
@@ -47,6 +50,12 @@ class ProgramAdapter(private var programList: List<ProgramDataClass>, private va
         holder.dateProgram.text = currentItem.date?.toFormattedDateString()
         holder.itemView.setOnClickListener {
             itemClickListener.onItemClick(currentItem)
+        }
+        holder.btnShareProgram.setOnClickListener {
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "text/plain"
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "https://drive.google.com/drive/folders/14kAtUjC64PnoyQLHqHOismjXD2ZKOYue?usp=drive_link")
+            holder.itemView.context.startActivity(Intent.createChooser(shareIntent, "Share link via"))
         }
     }
 

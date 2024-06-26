@@ -1,5 +1,7 @@
 package com.laznaslmi.mobileapplmi.ui.beranda.retrofit
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +25,7 @@ class BeritaAdapter(private var beritaList: List<BeritaDataClass>, private val i
         var imgBerita: ImageView = itemView.findViewById(R.id.img_imgBerita)
         var titleBerita: TextView = itemView.findViewById(R.id.tv_titleBerita)
         var dateBerita: TextView = itemView.findViewById(R.id.tv_dateBerita)
+        var btnShareBerita: ImageView = itemView.findViewById(R.id.btn_shareBerita)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BeritaViewHolder {
@@ -47,6 +50,12 @@ class BeritaAdapter(private var beritaList: List<BeritaDataClass>, private val i
         holder.dateBerita.text = currentItem.date?.toFormattedDateString()
         holder.itemView.setOnClickListener {
             itemClickListener.onItemClick(currentItem)
+        }
+        holder.btnShareBerita.setOnClickListener {
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "text/plain"
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "https://drive.google.com/drive/folders/14kAtUjC64PnoyQLHqHOismjXD2ZKOYue?usp=drive_link")
+            holder.itemView.context.startActivity(Intent.createChooser(shareIntent, "Share link via"))
         }
     }
 

@@ -1,5 +1,6 @@
 package com.laznaslmi.mobileapplmi.ui.beranda.retrofit
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,8 @@ class MitraAdapter(private var mitraList: List<MitraDataClass>, private val item
         var imgMitra: ImageView = itemView.findViewById(R.id.img_imgMitra)
         var titleMitra: TextView = itemView.findViewById(R.id.tv_titleMitra)
         var dateMitra: TextView = itemView.findViewById(R.id.tv_dateMitra)
+        var btnShareMitra: ImageView = itemView.findViewById(R.id.btnShareMitra)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MitraViewHolder {
@@ -47,6 +50,12 @@ class MitraAdapter(private var mitraList: List<MitraDataClass>, private val item
         holder.dateMitra.text = currentItem.date?.toFormattedDateString()
         holder.itemView.setOnClickListener {
             itemClickListener.onItemClick(currentItem)
+        }
+        holder.btnShareMitra.setOnClickListener {
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "text/plain"
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "https://drive.google.com/drive/folders/14kAtUjC64PnoyQLHqHOismjXD2ZKOYue?usp=drive_link")
+            holder.itemView.context.startActivity(Intent.createChooser(shareIntent, "Share link via"))
         }
     }
 

@@ -64,7 +64,7 @@
             android:textColor="@color/gray_400"/>
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/btnShareInspirasi"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_share"

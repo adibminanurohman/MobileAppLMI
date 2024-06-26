@@ -1,5 +1,6 @@
 package com.laznaslmi.mobileapplmi.ui.beranda
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
@@ -32,6 +33,13 @@ class DetailEdukasiActivity : AppCompatActivity() {
 
         binding.icBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+        binding.icShare.setOnClickListener {
+            val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT, "https://drive.google.com/drive/folders/14kAtUjC64PnoyQLHqHOismjXD2ZKOYue?usp=drive_link")
+            }
+            startActivity(Intent.createChooser(shareIntent, "Share link via"))
         }
 
         val detailEdukasi = intent.getParcelableExtra<EdukasiDataClass>("edukasi")
