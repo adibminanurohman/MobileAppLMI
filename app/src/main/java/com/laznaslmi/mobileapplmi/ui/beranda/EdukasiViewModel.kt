@@ -31,10 +31,10 @@ class EdukasiViewModel : ViewModel() {
     private fun fetchData() {
         viewModelScope.launch {
             try {
-                val response = RetrofitInstanceEdukasi.apiService.getEdukasiList(categoryId = 2)
+                val response = RetrofitInstanceEdukasi.apiService.getEdukasiList(categoryId = 4)
                 if (response.success) {
                     _edukasiList.postValue(response.posts
-                        .filter { it.categoryId == 2 }
+                        .filter { it.categoryId == 4 }
                         .map { post ->
                             post.copy(
                                 body = post.body?.let { HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY).toString() },

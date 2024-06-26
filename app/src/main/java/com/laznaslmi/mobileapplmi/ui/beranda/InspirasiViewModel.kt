@@ -31,10 +31,10 @@ class InspirasiViewModel : ViewModel() {
     private fun fetchData() {
         viewModelScope.launch {
             try {
-                val response = RetrofitInstanceInspirasi.apiService.getInspirasiList(categoryId = 2)
+                val response = RetrofitInstanceInspirasi.apiService.getInspirasiList(categoryId = 3)
                 if (response.success) {
                     _inspirasiList.postValue(response.posts
-                        .filter { it.categoryId == 2 }
+                        .filter { it.categoryId == 3 }
                         .map { post ->
                             post.copy(
                                 body = post.body?.let { HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY).toString() },

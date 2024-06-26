@@ -28,8 +28,10 @@ class BeritaViewModel : ViewModel() {
     internal fun fetchData() {
         viewModelScope.launch {
             try {
-                val response = RetrofitInstanceBerita.apiService.getBeritaList()
-                val postsWithPlainText = response.posts.map { post ->
+                val response = RetrofitInstanceBerita.apiService.getBeritaList(categoryId = 1)
+                val postsWithPlainText = response.posts
+                    .filter { it.categoryId == 1 }
+                    .map { post ->
                     post.copy(
                         body = post.body?.let { HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY).toString() },
                         image = fixImageUrl(post.image)

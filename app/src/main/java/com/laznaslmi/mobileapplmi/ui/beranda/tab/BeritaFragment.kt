@@ -26,6 +26,8 @@ import com.laznaslmi.mobileapplmi.ui.beranda.retrofit.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 
 class BeritaFragment : Fragment() {
 
@@ -125,7 +127,9 @@ class BeritaFragment : Fragment() {
                 if (response.isSuccessful) {
                     val banners = response.body()?.banners
                     if (!banners.isNullOrEmpty()) {
-                        val limitedBanners = banners.take(5)
+                        // Sort banners by created_at date in descending order
+                        val sortedBanners = banners.sortedByDescending { parseDate(it.created_at) }
+                        val limitedBanners = sortedBanners.take(5)
                         bannerAdapter.updateData(limitedBanners)
                         setupDots(limitedBanners.size)
                     }
@@ -140,6 +144,11 @@ class BeritaFragment : Fragment() {
                 binding.swipeRefresh.isRefreshing = false
             }
         })
+    }
+
+    private fun parseDate(dateString: String): Date? {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'", Locale.getDefault())
+        return dateFormat.parse(dateString)
     }
 
     private fun setupDots(size: Int) {
