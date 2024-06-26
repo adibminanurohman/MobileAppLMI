@@ -30,8 +30,8 @@ class BannerAdapter(
             .load(banner.image)
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.placeholder_image)
-                    .error(R.drawable.error_image))
+                    .placeholder(R.drawable.placeholdernew1)
+                    .error(R.drawable.placeholdernew))
             .into(holder.bannerImage)
     }
 

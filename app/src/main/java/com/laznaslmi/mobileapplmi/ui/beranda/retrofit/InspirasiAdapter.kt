@@ -40,8 +40,8 @@ class InspirasiAdapter(private var inspirasiList: List<InspirasiDataClass>, priv
             .load(currentItem.image)
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.placeholder_image)
-                    .error(R.drawable.error_image))
+                    .placeholder(R.drawable.placeholderpost)
+                    .error(R.drawable.placeholderposteror))
             .into(holder.imgInspirasi)
         holder.titleInspirasi.text = currentItem.title
         holder.dateInspirasi.text = currentItem.date?.toFormattedDateString()

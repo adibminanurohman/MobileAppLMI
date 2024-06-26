@@ -40,8 +40,8 @@ class ProgramAdapter(private var programList: List<ProgramDataClass>, private va
             .load(currentItem.image)
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.placeholder_image)
-                    .error(R.drawable.error_image))
+                    .placeholder(R.drawable.placeholderpost)
+                    .error(R.drawable.placeholderposteror))
             .into(holder.imgProgram)
         holder.titleProgram.text = currentItem.title
         holder.dateProgram.text = currentItem.date?.toFormattedDateString()

@@ -40,8 +40,8 @@ class SearchExploreAdapter(private var searchExploreList: List<SearchExploreData
             .load(currentItem.image)
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.placeholder_image)
-                    .error(R.drawable.error_image))
+                    .placeholder(R.drawable.placeholderpost)
+                    .error(R.drawable.placeholderposteror))
             .into(holder.imgSearchExplore)
         holder.titleSearchExplore.text = currentItem.title
         holder.dateSearchExplore.text = currentItem.date?.toFormattedDateString()

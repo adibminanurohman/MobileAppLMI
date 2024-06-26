@@ -40,8 +40,8 @@ class MitraAdapter(private var mitraList: List<MitraDataClass>, private val item
             .load(currentItem.image)
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.placeholder_image)
-                    .error(R.drawable.error_image))
+                    .placeholder(R.drawable.placeholderpost)
+                    .error(R.drawable.placeholderposteror))
             .into(holder.imgMitra)
         holder.titleMitra.text = currentItem.title
         holder.dateMitra.text = currentItem.date?.toFormattedDateString()

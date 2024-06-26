@@ -40,8 +40,8 @@ class EdukasiAdapter(private var edukasiList: List<EdukasiDataClass>, private va
             .load(currentItem.image)
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.placeholder_image)
-                    .error(R.drawable.error_image))
+                    .placeholder(R.drawable.placeholderpost)
+                    .error(R.drawable.placeholderposteror))
             .into(holder.imgEdukasi)
         holder.titleEdukasi.text = currentItem.title
         holder.dateEdukasi.text = currentItem.date?.toFormattedDateString()

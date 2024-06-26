@@ -41,7 +41,7 @@ class MajalahAdapter(private var majalahList: List<MajalahDataClass>, private va
             .load(currentItem.image)
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.placeholder_image)
+                    .placeholder(R.drawable.placeholdermajalah)
                     .error(R.drawable.error_image))
             .into(holder.image)
         holder.title.text = currentItem.title
