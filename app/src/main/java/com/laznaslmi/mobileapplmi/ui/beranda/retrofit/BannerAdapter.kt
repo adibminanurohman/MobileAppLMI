@@ -27,7 +27,7 @@ class BannerAdapter(
     override fun onBindViewHolder(holder: BannerViewHolder, position: Int) {
         val banner = banners[position]
         Glide.with(context)
-            .load(banner.image)
+            .load(banner.image_full)
             .apply(
                 RequestOptions()
                     .placeholder(R.drawable.placeholdernew1)

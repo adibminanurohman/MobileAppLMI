@@ -15,5 +15,6 @@ data class Banner(
 	val updated_at: String,
 	val language: String,
 	val type: String,
-	val title: String
+	val title: String,
+	val image_full: String
 )
